@@ -5,6 +5,9 @@ service OrderService {
   rpc GetOrder (GetOrderRequest) returns (GetOrderResponse);
   rpc ListOrders (Empty) returns (ListOrderResponse);
   rpc GetPayment (GetPaymentRequest) returns (GetPaymentResponse);
+
+  // added a new RPC method for handling the case: get an Order with all Payments associated with that Order
+  rpc GetOrderWithAllPayments (GetOrderRequest) returns (GetOrderWithAllPaymentsResponse);
 }
 
 message Empty {}
@@ -31,4 +34,19 @@ message GetPaymentResponse {
   int32 created_at = 3;
   string status = 4;
   GetOrderResponse order = 5;
+}
+
+// an utility message related to payment details that would be used in GetOrderWithAllPaymentsResponse
+// There's GetPaymentResponse structure also, but I haven't used that as it would unnecessarily fetch order response data into payment details
+// I wanted to segregate payment details.. that's why I used a structure of payment without any blend of data from order
+message GetOnlyPaymentDetails {
+  int32 payment_id = 1;
+  int32 created_at = 2;
+  string status = 3;
+}
+
+// response structure for GetOrderWithAllPayments rpc
+message GetOrderWithAllPaymentsResponse {
+  GetOrderResponse order = 1;
+  repeated GetOnlyPaymentDetails payments_list = 2;
 }
