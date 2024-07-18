@@ -40,4 +40,16 @@ impl Payment {
         let payments = dsl::payments.order(dsl::id.desc()).load(&mut conn)?;
         Ok(payments)
     }
+
+    // a new function to fetch payments by order_id
+    pub fn find_by_order_id(order_id: i32) -> Result<Vec<Self>, LandeedError>  {
+        let mut conn = db::connection()?;
+        
+        let payments = 
+            dsl::payments
+                .filter(dsl::order_id.eq(order_id))
+                .load(&mut conn)?;
+
+        Ok(payments)
+    }
 }
