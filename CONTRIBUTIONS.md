@@ -97,11 +97,9 @@ docker-compose first would look for the `Dockerfile` in the current context and 
 			"status": "Refunded"
 		}
 	],
-	"order": {
-		"order_id": 2,
-		"created_at": 1609491661,
-		"status": "Completed",
-		"premium": true
-	}
+	"order_id": 2,
+	"created_at": 1609491661,
+	"status": "Completed",
+	"premium": true
 }
 ```
