@@ -67,7 +67,10 @@ impl OrderService for OrderServer {
         let payments_resp = get_all_payments_response_for_an_order(order_id);
         
         Ok(Response::new(GetOrderWithAllPaymentsResponse {
-            order: Some(GetOrderResponse::from(order)),
+            order_id: order.id,
+            created_at: order.created_at,
+            status: order.status,
+            premium: order.premium,
             payments_list: payments_resp
         }))
     }
