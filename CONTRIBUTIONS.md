@@ -53,7 +53,7 @@ docker-compose first would look for the `Dockerfile` in the current context and 
   - Here I've implemented a handler method to find all payments using `order_id` (`find_by_order_id()`) for Payment model.
 - [x] [src/services/orders/utils.rs](src/services/orders/utils.rs)
   - The rpc response requires a list of all payments of an order including the order itself.
-  - And for payments, I defined a custom message structure `GetOnlyPaymentDetails` in the .proto file. So, here an utility function i.e. `get_all_payments_for_an_order()` is implemented to fetch all the payments of a particular order, which would direcvtly be used in the response section of service function.
+  - And for payments, I defined a custom message structure `GetOnlyPaymentDetails` in the .proto file. So, here an utility function i.e. `get_all_payments_response_for_an_order()` is implemented to fetch all the payments of a particular order, which would direcvtly be used in the response section of service function.
   - One thing to note here is each payment of the return type of this utility function would be of type `GetOnlyPaymentDetails`. So, construction of response type is also done here.
 - [x] [src/services/orders/service.rs](src/services/orders/service.rs)
   - And finally in the `get_order_with_all_payments()` function, the `GetOrderResponse` and `Vec<GetOnlyPaymentDetails>` are returned as response to the client.
