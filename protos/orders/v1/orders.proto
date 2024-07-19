@@ -47,6 +47,9 @@ message GetOnlyPaymentDetails {
 
 // response structure for GetOrderWithAllPayments rpc
 message GetOrderWithAllPaymentsResponse {
-  GetOrderResponse order = 1;
-  repeated GetOnlyPaymentDetails payments_list = 2;
+  int32 order_id = 1;
+  int32 created_at = 2;
+  string status = 3;
+  bool premium = 4;
+  repeated GetOnlyPaymentDetails payments_list = 5;
 }
